@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://storage-cdn.oray.com/suggest/9ee54bda41d2e9c0571d29ac231e8b61') center/cover no-repeat;
+        }
+
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.2); /* 添加半透明背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-group input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .form-group button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        {% if not show_login %}
+        #login {
+            display: none;
+        {% endif %}
+        {% if not show_registration %}
+        #registration {
+            display: none;
+        {% endif %}
+    </style>
+</head>
+<body>
+    <div class="auth-container" id="login">
+        <h2>User Authentication</h2>
+        <form class="auth-form" action="http://localhost:5000/login" method="post">
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+         <p>Don't have an account? <a href="#" onclick="toggleRegistration()">Register here</a></p>
+    </div>
+
+    <div class="auth-container" id="registration">
+        <h2>User Registration</h2>
+        <form class="auth-form" action="/register" method="post">
+            <div class="form-group">
+                <label for="reg-username">Name:</label>
+                <input type="text" id="reg-username" name="reg-username" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-phone">Phone:</label>
+                <input type="tel" id="reg-phone" name="reg-phone" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="reg-password" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">re_password:</label>
+                <input type="password" id="re-password" name="re-password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+
+        </form>
+        <p>Already have an account? <a href="#" onclick="toggleLogin()">Login here</a></p>
+    </div>
+    <script>
+    // JavaScript function to toggle between login and registration sections
+    function toggleRegistration() {
+        var loginSection = document.getElementById('login');
+        var registrationSection = document.getElementById('registration');
+
+        loginSection.style.display = 'none';
+        registrationSection.style.display = 'block';
+    }
+
+    function toggleLogin() {
+        var loginSection = document.getElementById('login');
+        var registrationSection = document.getElementById('registration');
+
+        loginSection.style.display = 'block';
+        registrationSection.style.display = 'none';
+    }
+    </script>
+
+
+</body>
+</html>
